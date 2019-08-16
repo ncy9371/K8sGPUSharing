@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: mtgpupod-deviceplugin
+  namespace: kube-system
+  labels:
+    lsalab: mtgpupod-deviceplugin
+spec:
+  selector:
+    matchLabels:
+      lsalab: mtgpupod-deviceplugin
+  template:
+    metadata:
+      labels:
+        lsalab: mtgpupod-deviceplugin
+    spec:
+      terminationGracePeriodSeconds: 0
+      restartPolicy: Always
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+      containers:
+      - name: mtgpupod-deviceplugin
+        image: ncy9371/debian:stretch-slim-wget
+        command:
+        - "sh"
+        - "-c"
+        - >
+          wget -qO /mtgpupod-lib/libcuhook.so.1 140.114.78.229/web/libcuhook.so.1 && 
+          wget -qO /client 140.114.78.229/web/client && 
+          chmod +x /client && 
+          /client -alsologtostderr -server-ip mtgpupod-controller.kube-system.svc:9797 -v=4
+        env:
+        - name: MTGPUPOD_SCHEDULER
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: NVIDIA_VISIBLE_DEVICES
+          value: all
+        - name: NVIDIA_DRIVER_CAPABILITIES
+          value: utility
+        volumeMounts:
+        - name: "mtgpupod-scheduler"
+          mountPath: "/mtgpupod-scheduler"
+        - name: "mtgpupod-lib"
+          mountPath: "/mtgpupod-lib"
+      - name: mtgpupod-scheduler
+        image: ncy9371/debian:stretch-slim-wget
+        command:
+        - "sh"
+        - "-c"
+        - >
+          wget -qO /scheduler 140.114.78.229/web/scheduler &&
+          wget -qO /launcher-multigpus.sh 140.114.78.229/web/launcher-multigpus.sh &&
+          wget -qO /launcher.sh 140.114.78.229/web/launcher.sh &&
+          chmod +x /scheduler &&
+          chmod +x /launcher-multigpus.sh &&
+          chmod +x /launcher.sh &&
+          echo 0 > /mtgpupod-scheduler/GPU_limit.txt &&
+          /launcher-multigpus.sh
+        env:
+        - name: NVIDIA_VISIBLE_DEVICES
+          value: all
+        - name: NVIDIA_DRIVER_CAPABILITIES
+          value: utility
+        volumeMounts:
+        - name: "mtgpupod-scheduler"
+          mountPath: "/mtgpupod-scheduler"
+        - name: "mtgpupod-lib"
+          mountPath: "/mtgpupod-lib"
+        volumeMounts:
+        - name: "mtgpupod-scheduler"
+          mountPath: "/mtgpupod-scheduler"
+      volumes:
+      - name: "mtgpupod-scheduler"
+        hostPath:
+          path: "/mtgpupod-scheduler"
+      - name: "mtgpupod-lib"
+        hostPath:
+          path: "/mtgpupod-lib"

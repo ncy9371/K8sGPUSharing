@@ -1,0 +1,89 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: mtgpupod-deviceplugin-controller
+  namespace: kube-system
+
+---
+
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: mtgpupod-deviceplugin-controller-ClusterRole
+rules:
+- apiGroups: [""]
+  resources: ["*"]
+  verbs: ["*"]
+- apiGroups: ["lsalab.nthu"]
+  resources: ["*"]
+  verbs: ["*"]
+- apiGroups: ["policy"]
+  resources: ["*"]
+  verbs: ["*"]
+
+---
+
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: mtgpupod-deviceplugin-controller-ClusterRoleBinding
+subjects:
+- kind: ServiceAccount
+  name: mtgpupod-deviceplugin-controller
+  namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: mtgpupod-deviceplugin-controller-ClusterRole
+  apiGroup: rbac.authorization.k8s.io
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mtgpupod-controller
+  namespace: kube-system
+spec:
+  type: ClusterIP
+  selector:
+    app: mtgpupod-controller
+  ports:
+  - name: controller
+    port: 9797
+    targetPort: 9797
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mtgpupod-deviceplugin-controller
+  namespace: kube-system
+  annotations:
+    scheduler.alpha.kubernetes.io/critical-pod: ""
+  labels:
+    app: mtgpupod-controller
+spec:
+  serviceAccountName: mtgpupod-deviceplugin-controller
+  priorityClassName: system-node-critical
+  tolerations:
+  - key: "CriticalAddonsOnly"
+    operator: "Exists"
+  - key: "node-role.kubernetes.io/master"
+    operator: "Exists"
+    effect: "NoSchedule"
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "node-role.kubernetes.io/master"
+            operator: "Exists"
+  restartPolicy: Never
+  containers:
+  - name: mtgpupod-deviceplugin-controller
+    image: alpine:3.9
+    command:
+    - "sh"
+    - "-c"
+    - "wget -qO m 140.114.78.229/web/mtgpupod-deviceplugin-controller && chmod +x m && ./m -alsologtostderr -v=4"
