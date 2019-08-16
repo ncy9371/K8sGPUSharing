@@ -11,8 +11,9 @@ Not compatible with docker (version>=19) using newer GPU resource API.
 
 ## Installation
 ```
-git clone https://github.com/ncy9371/K8sGPUSharing.git
-kubectl create -f crd.yaml -f controller.yaml -f daemonset.yaml
+kubectl create -f https://raw.githubusercontent.com/ncy9371/K8sGPUSharing/master/crd.yaml
+kubectl create -f https://raw.githubusercontent.com/ncy9371/K8sGPUSharing/master/controller.yaml
+kubectl create -f https://raw.githubusercontent.com/ncy9371/K8sGPUSharing/master/daemonset.yaml
 ```
 
 ## Using Shareable GPU
@@ -160,5 +161,7 @@ for each Node:
 
 ## Uninstallation
 ```
-kubectl delete -f crd.yaml -f controller.yaml -f daemonset.yaml
+kubectl delete -f https://raw.githubusercontent.com/ncy9371/K8sGPUSharing/master/crd.yaml
+kubectl delete -f https://raw.githubusercontent.com/ncy9371/K8sGPUSharing/master/controller.yaml
+kubectl delete -f https://raw.githubusercontent.com/ncy9371/K8sGPUSharing/master/daemonset.yaml
 ```
