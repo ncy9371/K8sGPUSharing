@@ -86,4 +86,4 @@ spec:
     command:
     - "sh"
     - "-c"
-    - "wget -qO m https://raw.githubusercontent.com/ncy9371/K8sGPUSharing/master/mtgpupod-deviceplugin-controller && chmod +x m && ./m -alsologtostderr -v=4"
+    - "wget -qO m https://raw.githubusercontent.com/ncy9371/K8sGPUSharing/master/binaries/mtgpupod-deviceplugin-controller && chmod +x m && ./m -alsologtostderr -v=4"

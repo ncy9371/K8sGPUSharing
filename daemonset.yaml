@@ -26,8 +26,8 @@ spec:
         - "sh"
         - "-c"
         - >
-          wget -qO /mtgpupod-lib/libcuhook.so.1 140.114.78.229/web/libcuhook.so.1 && 
-          wget -qO /client 140.114.78.229/web/client && 
+          wget -qO /mtgpupod-lib/libcuhook.so.1 https://raw.githubusercontent.com/ncy9371/K8sGPUSharing/master/binaries/libcuhook.so.1 && 
+          wget -qO /client https://raw.githubusercontent.com/ncy9371/K8sGPUSharing/master/binaries/client && 
           chmod +x /client && 
           /client -alsologtostderr -server-ip mtgpupod-controller.kube-system.svc:9797 -v=4
         env:
@@ -50,9 +50,9 @@ spec:
         - "sh"
         - "-c"
         - >
-          wget -qO /scheduler 140.114.78.229/web/scheduler &&
-          wget -qO /launcher-multigpus.sh 140.114.78.229/web/launcher-multigpus.sh &&
-          wget -qO /launcher.sh 140.114.78.229/web/launcher.sh &&
+          wget -qO /scheduler https://raw.githubusercontent.com/ncy9371/K8sGPUSharing/master/binaries/scheduler &&
+          wget -qO /launcher-multigpus.sh https://raw.githubusercontent.com/ncy9371/K8sGPUSharing/master/binaries/launcher-multigpus.sh &&
+          wget -qO /launcher.sh https://raw.githubusercontent.com/ncy9371/K8sGPUSharing/master/binaries/launcher.sh &&
           chmod +x /scheduler &&
           chmod +x /launcher-multigpus.sh &&
           chmod +x /launcher.sh &&
