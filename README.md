@@ -150,7 +150,7 @@ for each Node:
     allocatedGPUMap := map of GPUID=>usage
 
     for each Pod on Node:
-        if ! Pod.Name.Contains("mtgpupod-occupypod")
+        if ! Pod.Name.Contains("mtgpupod-occupypod") // avoid repeat calculate to MtgpuPod
             availableGPU -= sum of "nvidia.com/gpu" request of containers in Pod
 
     for each MtgpuPod on Node:
