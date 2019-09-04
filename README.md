@@ -56,6 +56,7 @@ Because floating point custom device requests is forbidden by K8s, we move GPU r
 * lsalab.nthu/gpu_limit: maximum extra usage if GPU still has free resources, gpu_request <= gpu_limit <= "1.0".
 * lsalab.nthu/gpu_mem: maximum GPU memory usage of Pod.
 * lsalab.nthu/GPUID: described in section [Controlling everything of shareable GPU](#controlling-everything-of-shareable-gpu).
+* spec is a normal PodSpec definition to be deployed.
 * spec.nodeName must be assigned (a deployed MtgpuPod must be scheduled). More information described in section [Cluster resources accounting](#cluster-resources-accounting).
 
 ## Controlling everything of shareable GPU
