@@ -46,7 +46,7 @@ An example yaml file located at ```~/examples/mtgpupod/jupyter.yaml```.
 ```
 kubectl create -f ~/examples/mtgpupod/jupyter.yaml
 ```
-Get the NodePort and access the notebook from ```140.114.78.243:32753``` in this example.
+Get the NodePort and access the notebook from ```<server-ip>:32753``` in this example.
 ```
 kubectl get svc jupyter1-svc
 NAME           TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
