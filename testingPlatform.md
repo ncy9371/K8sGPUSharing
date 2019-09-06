@@ -59,7 +59,7 @@ kubectl delete -f ~/examples/mtgpupod/jupyter.yaml
 
 ### Deploy a TFJob
 #### With dashboard
-The dashboard located at ```140.114.78.243:8080/tfjobs/ui/```.
+The dashboard located at ```<server-ip>:8080/tfjobs/ui/```.
 #### With commands
 An example yaml file located at ```~/examples/tfjob/tfjob.yaml```.
 ```
