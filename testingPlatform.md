@@ -5,7 +5,7 @@ If you are interested in the sharing GPUs between Pods, please contact ta.yeh@ls
 It's dangerous to put your critical contents in the testing platform. Basically, having the right to manipulate Pods is to have the permission for accessing the host and everything.
 
 ## Terms of Use
-* Cannot launch any Pod with privileged permission. Also, cannot modify any setting of the host or any files not your own.
+* Cannot launch any Pod with privileged permission. Also, cannot access or modify any setting of the host or any files not your own.
 * Each user has a quota of 10G.
 
 ## Accessing Kubernetes
