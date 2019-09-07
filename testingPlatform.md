@@ -6,7 +6,7 @@ It's dangerous to put your critical contents in the testing platform. Basically,
 
 ## Terms of Use
 * Cannot launch any Pod with privileged permission. Also, cannot access or modify any setting of the host or any files not your own.
-* Each user has a quota of 10G.
+* Each user has a quota of 10G (enter```quota -s``` to query your quota).
 
 ## Accessing Kubernetes
 A file located at ```~/.kube/config``` is configured to access Kubernetes.
