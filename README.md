@@ -12,6 +12,7 @@ Follow this [link](testingPlatform.md)
 * Only support Nvidia GPU device plugin with nvidia-docker2 in K8s.  
 Not compatible with docker (version>=19) using newer GPU resource API.
 * Currently only support cuda 9.0
+* Require Kubernetes version >= 1.10 (device plugin & CRD)
 
 ## Prerequisite
 * A K8s cluster with Nvidia GPU device plugin.
