@@ -2,11 +2,12 @@
 Make GPU shareable in Kubernetes
 
 ## Features
-* Compatible with "nvidia.com/gpu" resource type
-* Resource definition in high precision (0.333333333)
-* Support GPU compute and memory requirement
+* Compatible with native K8s resource management
+* Fine-grained resource definition
+* Support GPU compute and memory limit
 * Support multiple GPU in a node
-* High bin-packing scheduling algorithm extensibility
+* Avoid GPU fragmentation problem
+* Support GPU namespace
 
 ## Interested?
 Follow this [link](testingPlatform.md)
