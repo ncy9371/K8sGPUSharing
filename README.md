@@ -64,10 +64,10 @@ spec:
         memory: "500Mi"
 ```
 Because floating point custom device requests is forbidden by K8s, we move GPU resource usage definitions to Annotations.
-* lsalab.nthu/gpu_request (Feature 2,3): guaranteed GPU usage of Pod, gpu_request <= "1.0".
-* lsalab.nthu/gpu_limit (Feature 2,3): maximum extra usage if GPU still has free resources, gpu_request <= gpu_limit <= "1.0".
-* lsalab.nthu/gpu_mem (Feature 2,3): maximum GPU memory usage of Pod.
-* lsalab.nthu/GPUID (Feature 4,5,6): described in section [Controlling everything of shareable GPU](#controlling-everything-of-shareable-gpu).
+* lsalab.nthu/gpu_request: guaranteed GPU usage of Pod, gpu_request <= "1.0".
+* lsalab.nthu/gpu_limit: maximum extra usage if GPU still has free resources, gpu_request <= gpu_limit <= "1.0".
+* lsalab.nthu/gpu_mem: maximum GPU memory usage of Pod.
+* lsalab.nthu/GPUID: described in section [Controlling everything of shareable GPU](#controlling-everything-of-shareable-gpu).
 * spec is a normal PodSpec definition to be deployed.
 * spec.nodeName must be assigned (a deployed MtgpuPod must be scheduled). More information described in section [Cluster resources accounting](#cluster-resources-accounting).
 
@@ -147,7 +147,7 @@ GPU1(asdfg)      GPU2(zxcvb)
 +--------------+ +--------------+
 ```
 
-## Compatible with Nvidia device plugin (Feature 1)
+## Compatible with Nvidia device plugin
 
 ### The Occupy-Pod
 To prevent K8s default-scheduler cannot recognize MtgpuPods, causing that default-scheduler schedules Pods to Node whose physcial GPUs are used by MtgpuPod, we run an Occupy-Pod with 1 Nvidia device plugin GPU request (spec.containers[0].resources.requests: "nvidia.com/gpu": 1) when a new GPUID was generated, telling default-scheduler that GPU is wanted by MtgpuPod system.
