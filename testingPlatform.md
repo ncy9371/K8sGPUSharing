@@ -71,6 +71,3 @@ Delete the tfjob
 ```
 kubectl delete -f ~/examples/tfjob/tfjob.yaml
 ```
-
-## Issues
-Currently the GPU memory usage control may not work properly.

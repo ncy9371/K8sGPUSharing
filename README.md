@@ -184,3 +184,7 @@ kubectl delete -f https://lsalab.cs.nthu.edu.tw/~ericyeh/gpusharing/crd.yaml
 kubectl delete -f https://lsalab.cs.nthu.edu.tw/~ericyeh/gpusharing/controller.yaml
 kubectl delete -f https://lsalab.cs.nthu.edu.tw/~ericyeh/gpusharing/daemonset.yaml
 ```
+
+## Issues
+Currently the GPU memory usage control may not work properly.
+
